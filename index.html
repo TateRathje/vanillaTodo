@@ -8,15 +8,19 @@
 <body>
 	
 	<div class="write">
-		<form action="">
-			<input type="text">
-			<input type="text">
+		<form class="write-note-form" action="">
+			<input type="text" class="write-note">
+			<input type="submit" class="submit-note" value="Add">
 		</form>
 	</div>
 
 	<div class="read">
-		<h3></h3>
-		<ul></ul>
+		<h3 class="no-notes-found hidden">
+			You have no notes saved so far. Go ahead and make some! :)		
+		</h3>
+		<ul class="notes">
+			
+		</ul>
 	</div>
 
 	<script src="router.js"></script>
