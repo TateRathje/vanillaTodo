@@ -112,12 +112,23 @@ app.main = (function() {
 
 	};
 
-	var initialRender = function () {
-		
-		if (('notes' in localStorage) && (JSON.parse(localStorage.getItem('notes')) > 0)) {
+	var initialRender = function() {
 
-			notes = 
-			
+		if (('notes' in localStorage) && (JSON.parse(localStorage.getItem('notes')).length > 0)) {
+
+			notes = JSON.parse(localStorage.getItem('notes')).slice();
+
+			var i = 0,
+				len = notes.length,
+				loadedNote;
+
+			for (i; i < len; i += 1) {
+				loadedNote = new Model(notes[i], notes);
+				new View(loadedNote, elements.noteList).init();
+			}
+
+		} else {
+			elements.noNotesFound.classList.remove('hidden');
 		}
 	};
 
