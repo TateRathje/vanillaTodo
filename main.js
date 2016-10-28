@@ -31,29 +31,51 @@ app.main = (function() {
 			that = this;
 
 		this.render = function() {
-			
+
 			this.listItem = document.createElement('li');
 			this.paragraph = document.createElement('p');
 			this.actions = document.createElement('ul');
 			this.removeButton = document.createElement('li');
 			this.likeButton = document.createElement('li');
 
+			this.listItem.classList.add('note');
+			this.actions.classList.add('actions');
+			this.actions.removeButton.add('remove', 'icon-cancel');
+			this.actions.likeButton.add('like', 'icon-heart');
+
+			if (note.data.liked) {
+				this.likeButton.classList.add('liked');
+			}
+
+			addAsFirstChild(elements.noteList, this.listItem);
+			elements.noNotesFound.classList.add('hidden');
+			return this;
+
 		};
 
 		this.like = function() {
-			// body...
+			note.like();
+			that.likeButton.classList.toggle('liked');
 		};
 
 		this.remove = function() {
-			// body...
+			elements.noteList.removeChild(that.listItem);
+			note.remove();
+			if (elements.noteList.childElementCount === 0) {
+				elements.noNotesFound.classList.remove('hidden');
+			}
 		};
 
 		this.attachEvents = function() {
-			// body...
+			this.likeButton.addEventListener('click', this.like);
+			this.removeButton.addEventListener('click', this.remove);
+
 		};
 
 		this.init = function() {
-			// body...
+			this.render();
+			this.attachEvents();
+			return this;
 		};
 
 	};
@@ -90,6 +112,13 @@ app.main = (function() {
 
 	};
 
+	var initialRender = function () {
+		
+		if (('notes' in localStorage) && (JSON.parse(localStorage.getItem('notes')) > 0)) {
 
+			notes = 
+			
+		}
+	};
 
 })();
