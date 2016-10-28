@@ -25,30 +25,36 @@ app.main = (function() {
 		}
 	};
 
-	var View = function (note, containerEl) {
-		
+	var View = function(note, containerEl) {
+
 		var index = notes.indexOf(note),
-				that = this;
+			that = this;
 
-				this.render = function () {
-					// body...
-				};
+		this.render = function() {
+			
+			this.listItem = document.createElement('li');
+			this.paragraph = document.createElement('p');
+			this.actions = document.createElement('ul');
+			this.removeButton = document.createElement('li');
+			this.likeButton = document.createElement('li');
 
-				this.like = function () {
-					// body...
-				};
+		};
 
-				this.remove = function () {
-					// body...
-				};
+		this.like = function() {
+			// body...
+		};
 
-				this.attachEvents = function () {
-					// body...
-				};
+		this.remove = function() {
+			// body...
+		};
 
-				this.init = function () {
-					// body...
-				};	 
+		this.attachEvents = function() {
+			// body...
+		};
+
+		this.init = function() {
+			// body...
+		};
 
 	};
 
