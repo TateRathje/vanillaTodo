@@ -13,6 +13,18 @@ app.main = (function() {
 
 	var attachEvents = function() {
 
+		elements.noteSubmit.addEventListener('click', function(event) {
+			event.preventDefault();
+			var fieldNote = elements.noteField.value;
+
+			var newNote = new Model({
+				noteBodyText: fieldNote,
+				like: false
+			}, notes).save();
+			new View(newNote, elements.noteList).init();
+
+			elements.noteField.value = '';
+		});
 	};
 
 	var addAsFirstChild = function(parent, child) {
@@ -40,8 +52,14 @@ app.main = (function() {
 
 			this.listItem.classList.add('note');
 			this.actions.classList.add('actions');
-			this.actions.removeButton.add('remove', 'icon-cancel');
-			this.actions.likeButton.add('like', 'icon-heart');
+			this.removeButton.classList.add('remove', 'icon-cancel');
+			this.likeButton.classList.add('like', 'icon-heart');
+
+			this.paragraph.innerHTML = note.data.noteBodyText;
+			this.actions.appendChild(this.removeButton);
+			this.actions.appendChild(this.likeButton);
+			this.listItem.appendChild(this.paragraph);
+			this.listItem.appendChild(this.actions);
 
 			if (note.data.liked) {
 				this.likeButton.classList.add('liked');
@@ -132,4 +150,17 @@ app.main = (function() {
 		}
 	};
 
+	var init = function () {
+		console.log('App init');
+		attachEvents();
+		initialRender();
+	}; 
+
+	return {
+		init: init,
+		notes: notes
+	};	 
+
 })();
+
+window.addEventListener('DOMContentLoaded', app.main.init);
